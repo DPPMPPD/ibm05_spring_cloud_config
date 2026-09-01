@@ -11,10 +11,6 @@ eureka:
   instance:
     hostname: localhost
     prefer-ip-address: true
-    # [수정] local.server.port 대신 server.port를 사용하면 Boot가 0번(동적포트) 요청 후 실제 포트를 자동 추적합니다.
-    non-secure-port: ${server.port}
-    # instance-id에 random.value를 조합하여 고유한 인스턴스로 Eureka에 등록합니다.
-    instance-id: ${spring.application.name}:${random.value}
   
 spring:
   rabbitmq:
