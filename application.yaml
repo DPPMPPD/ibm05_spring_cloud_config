@@ -5,14 +5,12 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-   instance:
-    # 1. 호스트네임 대신 IP(127.0.0.1 등) 주소를 사용하여 유레카와 통신하도록 강제 (★핵심: Blank 호스트 에러 방지)
+  instance:
+    # 1. 호스트네임 대신 IP 주소를 사용하여 유레카와 통신하도록 강제
     prefer-ip-address: true
-    
     # 2. 유레카 등록 포트를 0이 아닌 실제 런타임에 바인딩된 포트로 고정
     non-secure-port: ${spring.application.instance_id:${server.port:0}}
-    
-    # 3. 유레카에서 인식할 고유 ID 구조 고정 (서비스명 + 랜덤값 또는 실제 포트)
+    # 3. 유레카에서 인식할 고유 ID 구조 고정
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
     
 # 3307, admin, port 주의
@@ -49,4 +47,3 @@ spring:
       never-refreshable:
         - server.port
         - eureka.instance
-    
