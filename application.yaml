@@ -9,6 +9,7 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
   instance:
+    hostname: localhost
     prefer-ip-address: true
     # instance-id에 ${server.port} 대신 random.value나 local.server.port를 쓰거나 단순화합니다.
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
