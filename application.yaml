@@ -5,12 +5,13 @@ eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
-    refresh:
-      enable: false
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+    refresh:
+      enable: false
   instance:
-    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+    hostname: localhost
+    instance-id: ${spring.application.name}:${random.value}
   
 server:
   port: 0
