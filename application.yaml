@@ -5,11 +5,6 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-  instance:
-    # [★핵심 1] 포트 번호(0)를 ID에 조합하지 않고, 앱 이름과 부트가 구동 시 생성한 고유 ID 조합을 사용합니다.
-    # 리프레시가 수행되어도 이 ID는 최초 구동 시점에 고정되어 유레카가 동일 인스턴스로 인식합니다.
-    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${random.uuid}}
-    prefer-ip-address: true
 
 # 3307, admin, port 주의
 server:
@@ -40,8 +35,3 @@ spring:
   cloud:
     bus:
       enabled: true
-    refresh:
-      never-refreshable:
-        - com.netflix.discovery.EurekaClient
-        - com.netflix.appinfo.EurekaInstanceConfig
-
