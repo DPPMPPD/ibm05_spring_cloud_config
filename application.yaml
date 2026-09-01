@@ -38,9 +38,5 @@ spring:
     bus:
       enabled: true
     refresh:
-      # [핵심] Eureka Client 및 DB DataSource 빈이 busrefresh 시 파기되는 현상 완전 방지
-      never-refreshable: >
-        com.netflix.discovery.EurekaClient,
-        org.springframework.cloud.netflix.eureka.serviceregistry.EurekaAutoServiceRegistration,
-        javax.sql.DataSource,
-        com.zaxxer.hikari.HikariDataSource
+      # [핵심] 빈 재생성(RefreshScope)으로 인한 DB pool / Eureka client 끊김 방지
+      enabled: false
