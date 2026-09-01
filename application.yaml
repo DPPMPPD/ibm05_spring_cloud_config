@@ -5,7 +5,12 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-
+  instance:
+    # 0 대신 런타임에 할당된 실제 포트 번호를 유레카에 등록합니다.
+    non-secure-port: ${spring.application.instance_id:${server.port:0}}
+    # 유레카 인스턴스 ID가 중복되지 않도록 실제 포트를 포함시킵니다.
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${random.value}}
+    
 # 3307, admin, port 주의
 server:
   # 0으로 세팅하면 spring이 임의 port를 할당(굳이 8081..등으로 관리할 필요없음)
