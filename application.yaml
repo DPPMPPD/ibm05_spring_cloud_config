@@ -11,9 +11,10 @@ eureka:
   instance:
     hostname: localhost
     prefer-ip-address: true
-    # instance-id에 ${server.port} 대신 random.value나 local.server.port를 쓰거나 단순화합니다.
+    # [핵심] 랜덤 포트(port: 0) 사용 시 실제 바인딩된 포트를 Eureka에 넘겨주도록 설정
+    non-secure-port-enabled: true
+    non-secure-port: ${local.server.port}
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-    # non-secure-port 및 ip-address 설정 제거! (기본 자동 감지 사용)
   
 spring:
   rabbitmq:
