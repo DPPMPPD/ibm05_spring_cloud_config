@@ -6,15 +6,8 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
   instance:
-     # 1. ⚠️ 에러를 유발하는 non-secure-port 라인은 완전히 삭제하거나 주석 처리하세요.
-    # non-secure-port: ${local.server.port}  <-- 삭제
-
-    # 2. 대신 instance-id를 아래와 같이 변경합니다.
-    # server.port를 문자열 포맷 안에서 호출하면, 최초 구동 시 0이더라도 유레카 등록 시점에 실제 포트로 치환됩니다.
-    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
-    
-    # 3. IP 주소 기반으로 유레카에 등록하도록 설정 (안정성 확보)
-    prefer-ip-address: true
+    # 포트 번호(0)를 쓰지 않고, 애플리케이션 이름과 랜덤 UUID의 앞자리만 조합합니다.
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${random.uuid}
 
 # 3307, admin, port 주의
 server:
