@@ -5,14 +5,6 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-  instance:
-    prefer-ip-address: true
-    # 호스트 이름을 localhost로 완전히 때려 박아 변수 유실을 원천 차단합니다.
-    hostname: localhost
-    # 런타임에 어떤 포트가 할당되든 시스템 포트를 추적하도록 바인딩합니다.
-    non-secure-port: ${server.port}
-    # 인스턴스 ID가 공백이 되거나 유실되지 않도록 결합 구조를 단순화합니다.
-    instance-id: ${spring.application.name}:${random.uuid}
     
 # 3307, admin, port 주의
 server:
@@ -43,8 +35,4 @@ spring:
   cloud:
     bus:
       enabled: true
-    # 4. 버스 리프레시가 발생해도 포트 번호와 유레카 인스턴스 정보가 초기화(재생성)되는 것을 차단
-    refresh:
-      never-refreshable:
-        - server.port
-        - eureka.instance
+
