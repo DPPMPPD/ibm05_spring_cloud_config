@@ -8,11 +8,11 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-  instance:
-    hostname: localhost
-    prefer-ip-address: true
+  #instance:
+   # hostname: localhost
+    #prefer-ip-address: true
     # [수정] random.value로 인스턴스를 구분하면 Eureka가 내부적으로 실제 할당된 포트를 바인딩합니다.
-    instance-id: ${spring.application.name}:${random.value}
+   # instance-id: ${spring.application.name}:${random.value}
   
 spring:
   rabbitmq:
