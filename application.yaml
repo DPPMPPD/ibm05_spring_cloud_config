@@ -5,16 +5,15 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-  instance:
-    # 2. 유레카 등록 포트를 0이 아닌 실제 런타임에 바인딩된 포트로 강제 지정
+   instance:
+    # 1. 호스트네임 대신 IP(127.0.0.1 등) 주소를 사용하여 유레카와 통신하도록 강제 (★핵심: Blank 호스트 에러 방지)
+    prefer-ip-address: true
+    
+    # 2. 유레카 등록 포트를 0이 아닌 실제 런타임에 바인딩된 포트로 고정
     non-secure-port: ${spring.application.instance_id:${server.port:0}}
     
-    # 3. 유레카에서 인식할 고유 ID 설정 (호스트명 + 서비스명 + 랜덤값 또는 실제 포트)
-    instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${random.value}}
-    
-    # 4. (선택) 상태체크 및 홈 URL 경로에 실제 포트 매핑 보장
-    status-page-url-path: ${server.servlet.context-path:}/actuator/info
-    health-check-url-path: ${server.servlet.context-path:}/actuator/health
+    # 3. 유레카에서 인식할 고유 ID 구조 고정 (서비스명 + 랜덤값 또는 실제 포트)
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
     
 # 3307, admin, port 주의
 server:
@@ -45,7 +44,9 @@ spring:
   cloud:
     bus:
       enabled: true
+    # 4. 버스 리프레시가 발생해도 포트 번호와 유레카 인스턴스 정보가 초기화(재생성)되는 것을 차단
     refresh:
       never-refreshable:
-        - server.port # 1. 포트 변수가 refresh로 초기화되는 것을 절대 차단
+        - server.port
         - eureka.instance
+    
