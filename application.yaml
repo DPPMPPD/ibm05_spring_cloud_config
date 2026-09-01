@@ -5,6 +5,11 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+  instance:
+    # 인스턴스 ID에 실제 무작위로 할당된 포트 번호를 동적으로 결합
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    # 유레카에 등록할 포트를 실제 구동 포트로 명시
+    non-secure-port: ${server.port} 
 
 # 3307, admin, port 주의
 server:
