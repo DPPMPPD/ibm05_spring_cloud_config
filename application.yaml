@@ -8,13 +8,8 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-  instance:
-    # IP 주소를 Eureka에 등록하도록 지정 (10.0.0.1 같은 내부 IP 오탐 방지)
-    prefer-ip-address: true
-    # 실제 노출할 hostname 명시 (Local 환경)
-    hostname: localhost
-    # 서비스 주소를 확실하게 규정 (AppName:Host:Port 구조)
-    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    refresh:
+      enable: false
   
 spring:
   rabbitmq:
@@ -39,10 +34,3 @@ spring:
   cloud:
     bus:
       enabled: true
-    refresh:
-      # Eureka 및 DataSource 빈이 busrefresh 시 파기되는 것을 방지
-      never-refreshable: >
-        com.netflix.discovery.EurekaClient,
-        org.springframework.cloud.netflix.eureka.serviceregistry.EurekaAutoServiceRegistration,
-        javax.sql.DataSource,
-        com.zaxxer.hikari.HikariDataSource
