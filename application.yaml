@@ -48,3 +48,4 @@ spring:
     refresh:
       never-refreshable:
         - server.port # 1. 포트 변수가 refresh로 초기화되는 것을 절대 차단
+        - eureka.instance
