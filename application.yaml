@@ -33,3 +33,8 @@ spring:
     bus:
       enabled: true
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, refresh, busrefresh
