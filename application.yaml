@@ -38,6 +38,6 @@ spring:
     bus:
       enabled: true
     refresh:
-      # busrefresh 시 Eureka Client 관련 빈이 파기되어 캔슬되는 현상 방지 (핵심!)
-      extra-refreshable: none
+      # [핵심] busrefresh 시 Eureka 등록 관련 빈이 파기되어 등록 해제(Cancel)되는 현상을 완전 방지
+      never-refreshable: com.netflix.discovery.EurekaClient, org.springframework.cloud.netflix.eureka.serviceregistry.EurekaAutoServiceRegistration
 
