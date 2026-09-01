@@ -13,6 +13,9 @@ eureka:
     prefer-ip-address: true
     # 2. 명시적으로 IP/Host 지정
     ip-address: 127.0.0.1
+    # 1. 실제 동적 할당된 포트를 Eureka에 전달 (포트 80으로 잡히는 현상 방지)
+    non-secure-port: ${server.port}
+    non-secure-port-enabled: true
     # 3. 인스턴스 ID가 빈값이나 0으로 오염되지 않도록 무작위 값 바인딩
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   
